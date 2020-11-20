@@ -1,0 +1,7 @@
+configuration:
+  csvReader:
+    # auto = delimiter guesser
+    delimiter: auto
+    length: 1000
+    enclosure: '"'
+    escape: '\'

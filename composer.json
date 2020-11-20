@@ -1,0 +1,34 @@
+{
+    "name": "atomatis/simple-data-table-reader",
+    "description": "For easily parse basic data table files (xlsx, csv, ...).",
+    "type": "library",
+    "require": {
+        "php": ">=7.2.5",
+        "phpoffice/phpspreadsheet": "^1.15",
+        "symfony/yaml": "^5.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.4"
+    },
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "alexandre tomatis",
+            "email": "alexandre.tomatis@gmail.com"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleDataTableReader\\": "source/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SimpleDataTableReader\\Tests\\": "tests/"
+        }
+    }
+}
