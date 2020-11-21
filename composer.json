@@ -2,6 +2,8 @@
     "name": "atomatis/simple-data-table-reader",
     "description": "For easily parse basic data table files (xlsx, csv, ...).",
     "type": "library",
+    "keywords": ["csv", "xlsx", "data table", "reader", "file"],
+    "homepage": "https://github.com/atomatis/simple-data-table-reader",
     "require": {
         "php": ">=7.2.5",
         "phpoffice/phpspreadsheet": "^1.15",
