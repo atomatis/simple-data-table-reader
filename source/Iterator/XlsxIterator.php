@@ -6,8 +6,8 @@ namespace SimpleDataTableReader\Iterator;
 
 use SimpleDataTableReader\CaseConverter\SnakeCaseConverter;
 use SimpleDataTableReader\Exception\DuplicateHeaderValueException;
-use SimpleDataTableReader\PhpOffice\PhpSpreadsheet\IOFactory;
-use SimpleDataTableReader\PhpOffice\PhpSpreadsheet\Worksheet\RowCellIterator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Worksheet\RowCellIterator;
 
 /**
  * @author Alexandre Tomatis <alexandre.tomatis@gmail.com>
