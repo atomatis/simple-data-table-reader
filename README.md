@@ -22,7 +22,7 @@ Read a simple table_data.xlsx file
 like this
 
 ```php
- $reader = SimpleReaderFactory::createTableDataReader('file/table_data.xlsx');
+ $reader = SimpleReaderFactory::createTableDataReader('file/table_data.xlsx'/*, ?string $forceExtension*/);
  $reader->getHeader(); // return ['name', 'ref_id', 'tel_n']
 
  foreach ($reader->getIterator() as $row) {

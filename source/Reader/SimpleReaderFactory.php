@@ -20,10 +20,10 @@ final class SimpleReaderFactory
         ];
     }
 
-    public static function createTableDataReader(string $file): SimpleReaderInterface
+    public static function createTableDataReader(string $file, ?string $extension = null): SimpleReaderInterface
     {
         $pathInfo = pathinfo($file);
-        $extension = $pathInfo['extension'] ?? null;
+        $extension = $extension ?? ($pathInfo['extension'] ?? null);
 
         if (null === $extension) {
             throw ExtensionNullException::create($pathInfo['filename']);
