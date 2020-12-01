@@ -40,7 +40,15 @@ final class XlsxIterator extends AbstractIterator
     /** @{inheritdoc} */
     public function valid(): bool
     {
-        return $this->iterator->valid();
+        $allEmpty = true;
+
+        foreach ($this->iterator->current()->getCellIterator() as $cell) {
+            if (null !== $cell->getValue()) {
+                $allEmpty = false;
+            }
+        }
+
+        return $allEmpty ? false : $this->iterator->valid();
     }
 
     /** @{inheritdoc} */
