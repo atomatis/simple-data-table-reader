@@ -40,11 +40,9 @@ final class CsvIterator extends AbstractIterator
     /** @{inheritdoc} */
     public function current(): Row
     {
-        $row = Row::getInstance();
         $values = array_slice($this->row, 0, $this->headerSize);
-        $row->setRowValues($this->header, $values);
 
-        return $row;
+        return new Row($this->header, $values);
     }
 
     /** @{inheritdoc} */

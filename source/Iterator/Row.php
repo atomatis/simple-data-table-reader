@@ -11,37 +11,29 @@ final class Row
 {
     private $rowValues;
 
-    private static $_instance = null;
-
-    private function __construct() {
+    public function __construct(array $header, array $values) {
+        $this->rowValues = array_combine($header, $values);
     }
 
-    public function __invoke()
+    public function __invoke(): array
+    {
+        return $this->getValues();
+    }
+
+    public function getValues(): array
     {
         return $this->rowValues;
     }
 
-    public static function getInstance() {
-
-        if(is_null(self::$_instance)) {
-            self::$_instance = new Row();
-        }
-
-        return self::$_instance;
-    }
-
-    public function setRowValues(array $header, array $values): void
-    {
-        $this->rowValues = array_combine($header, $values);
-    }
-
-    /**
-     * @param string $index
-     *
-     * @return mixed
-     */
     public function get(string $index)
     {
         return $this->rowValues[$index] ?? null;
+    }
+
+    public function set(string $index, $value)
+    {
+        $this->rowValues[$index] = $value;
+
+        return $this;
     }
 }

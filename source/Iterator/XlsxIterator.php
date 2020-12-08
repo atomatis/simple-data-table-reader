@@ -24,7 +24,6 @@ final class XlsxIterator extends AbstractIterator
     /** @{inheritdoc} */
     public function current(): Row
     {
-        $row = Row::getInstance();
         $values = [];
 
         foreach ($this->iterator->current()->getCellIterator() as $cell) {
@@ -32,9 +31,8 @@ final class XlsxIterator extends AbstractIterator
         }
 
         $values = array_slice($values, 0, $this->headerSize);
-        $row->setRowValues($this->header, $values);
 
-        return $row;
+        return new Row($this->header, $values);
     }
 
     /** @{inheritdoc} */

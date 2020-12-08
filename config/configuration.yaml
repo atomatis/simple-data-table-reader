@@ -4,4 +4,4 @@ configuration:
     delimiter: auto
     length: 1000
     enclosure: '"'
-    escape: '\'
+    escape: \
