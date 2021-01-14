@@ -86,6 +86,7 @@ final class CsvIterator extends AbstractIterator
 
     private function generateHeader(): void
     {
+        $emptyHeader = false;
         $this->next();
 
         foreach ($this->row as $value) {
@@ -96,6 +97,17 @@ final class CsvIterator extends AbstractIterator
             // Block same value header.
             if (in_array($headerValue, $this->header)) {
                 throw DuplicateHeaderValueException::create($originalValue);
+            }
+
+            // Avoid extra void header column.
+            // TW: Blind for true empty lasts columns header
+            if ('' === $headerValue) {
+                $emptyHeader = true;
+                continue;
+            }
+
+            if ($emptyHeader && '' !== $headerValue) {
+                throw new \RuntimeException('Header value is empty.');
             }
 
             $this->header[] = $headerValue;

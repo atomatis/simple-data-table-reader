@@ -66,6 +66,8 @@ final class XlsxIterator extends AbstractIterator
 
     private function generateHeader(RowCellIterator $cellIterator): void
     {
+        $emptyHeader = false;
+
         foreach ($cellIterator as $cell) {
             $originalValue = $cell->getValue();
             $headerValue = SnakeCaseConverter::fromString($originalValue);
@@ -74,6 +76,17 @@ final class XlsxIterator extends AbstractIterator
             // Block same value header.
             if (in_array($headerValue, $this->header)) {
                 throw DuplicateHeaderValueException::create($originalValue);
+            }
+
+            // Avoid extra void header column.
+            // TW: Blind for true empty lasts columns header
+            if ('' === $headerValue) {
+                $emptyHeader = true;
+                continue;
+            }
+
+            if ($emptyHeader && '' !== $headerValue) {
+                throw new \RuntimeException('Header value is empty.');
             }
 
             $this->header[] = $headerValue;
