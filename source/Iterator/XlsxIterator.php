@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SimpleDataTableReader\Iterator;
 
+use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use SimpleDataTableReader\CaseConverter\SnakeCaseConverter;
 use SimpleDataTableReader\Exception\DuplicateHeaderValueException;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -21,7 +22,6 @@ final class XlsxIterator extends AbstractIterator
         $this->generateHeader($this->iterator->current()->getCellIterator());
     }
 
-    /** @{inheritdoc} */
     public function current(): Row
     {
         $values = [];
@@ -35,7 +35,6 @@ final class XlsxIterator extends AbstractIterator
         return new Row($this->header, $values);
     }
 
-    /** @{inheritdoc} */
     public function valid(): bool
     {
         $allEmpty = true;
@@ -49,14 +48,12 @@ final class XlsxIterator extends AbstractIterator
         return $allEmpty ? false : $this->iterator->valid();
     }
 
-    /** @{inheritdoc} */
     public function next(): void
     {
         $this->offset++;
         $this->iterator->next();
     }
 
-    /** @{inheritdoc} */
     public function rewind(): void
     {
         $this->iterator->rewind();
@@ -72,6 +69,10 @@ final class XlsxIterator extends AbstractIterator
             // Avoid extra void header column.
             if (null === $originalValue) {
                 break;
+            }
+
+            if ($originalValue instanceof RichText) {
+                $originalValue = $originalValue->getPlainText();
             }
 
             $headerValue = SnakeCaseConverter::fromString($originalValue);
